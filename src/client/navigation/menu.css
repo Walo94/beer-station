@@ -1,0 +1,10 @@
+/* Menu.css */
+.menu-item:hover .submenu,
+.submenu:hover {
+  display: block;
+}
+
+.submenu {
+  display: none;
+  z-index: 10; /* Asegúrate de que el submenú esté por encima del contenido */
+}
