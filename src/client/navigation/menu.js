@@ -4,14 +4,15 @@ import 'remixicon/fonts/remixicon.css';
 import logo from '../../img/ahorramax.png';
 import google_logo from '../../img/google-play-fill.png';
 import LoginPopup from './LoginPopup'
+import Cart from './cart';
 
 
-export default function BeerStationHeader() {
+export default function BeerStationHeader({ cartItems, removeFromCart }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [cartItems, setCartItems] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const [isCartVisible, setIsCartVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,46 +32,48 @@ export default function BeerStationHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300" style={{ backgroundColor: '#ffff00' }}>
-      <div className={`bg-gray-100 transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden' : 'h-10'}`}>
+      <div className={`bg-[#e60311] transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden' : 'h-10'}`}>
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex space-x-4">
             {/* Redes sociales */}
-            <a href="#" className="text-gray-600 hover:text-gray-900">
-              <i className="ri-facebook-fill text-lg" style={{ color: '#1877F2' }}></i>
+            <a href="#" className="text-gray-600">
+              <i className="ri-facebook-fill text-lg" style={{ color: '#FFF' }} ></i>
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-900">
-              <i className="ri-twitter-fill text-lg" style={{ color: '#1DA1F2' }}></i>
+              <i className="ri-twitter-fill text-lg" style={{ color: '#FFF' }}></i>
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-900">
-              <i className="ri-youtube-fill text-lg" style={{ color: '#FF0000' }}></i>
+              <i className="ri-youtube-fill text-lg" style={{ color: '#FFF' }}></i>
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-900">
-              <i className="ri-instagram-fill text-lg" style={{ color: '#C13584' }}></i>
+              <i className="ri-instagram-fill text-lg" style={{ color: '#FFF' }}></i>
             </a>
             <a href="#" className="text-gray-600 hover:text-gray-900">
-              <i className="ri-tiktok-fill text-lg" style={{ color: '#000000' }}></i>
+              <i className="ri-tiktok-fill text-lg" style={{ color: '#FFF' }}></i>
             </a>
           </div>
           <div className="flex items-center space-x-4">
-            <a href="#" className="text-sm text-gray-600 hover:text-gray-900">
+            <p className='text-white'>Envío gratis en pedidos de más de $1000! (sólo zona centro y alrededores de San Francisco del rincón).</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <a href="#" className="text-sm text-white hover:text-[#ffff00] flex items-center">
               <img src={google_logo} className="h-6 mr-2" alt="Google Play" />
+              APP MOVIL
             </a>
-            MOBILE APP
-            <select className="text-sm bg-transparent border-none text-gray-600 hover:text-gray-900 flex items-center">
-              <option value="es">ESPAÑOL</option>
-              <option value="en">ENGLISH</option>
-            </select>
           </div>
         </div>
       </div>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
           <div className="flex items-center">
-            <img
-              src={logo}
-              alt="Beer Station Logo"
-              className={`transition-all duration-300 ${isScrolled ? 'h-20 w-26' : 'h-20 w-26'}`}
-            />
+            <Link to="/">
+              <img
+                src={logo}
+                alt="Beer Station Logo"
+                className={`transition-all duration-300 ${isScrolled ? 'h-20 w-26' : 'h-20 w-26'}`}
+              />
+            </Link>
+
           </div>
           {/* Menú de hamburguesa para pantallas pequeñas */}
           <div className="flex items-center md:hidden">
@@ -206,19 +209,30 @@ export default function BeerStationHeader() {
               onClick={handleOpenPopup}
             >
               <a href="#" className="text-gray-600 hover:text-gray-900 flex items-center">
-                <i className="ri-user-line text-2xl mr-1"></i> Mis Pedidos
+                <i className="ri-user-line text-2xl mr-1"></i> Acceso/Registro
               </a>
             </div>
             {/* Mostrar Popup si está activo */}
             {showPopup && <LoginPopup onClose={handleClosePopup} />}
-            <div className="relative">
-              <a href="#" className="text-gray-600 hover:text-gray-900">
+            <div className="relative" onMouseLeave={() => setIsCartVisible(false)}>
+              <Link
+                to="#"
+                className="text-gray-600 hover:text-gray-900"
+                onMouseEnter={() => setIsCartVisible(true)}
+              >
                 <i className="ri-shopping-cart-line text-2xl"></i>
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems}
+                  {cartItems.length}
                 </span>
-              </a>
+              </Link>
+              {/* Tooltip del carrito */}
+              {isCartVisible && (
+                
+                  <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+               
+              )}
             </div>
+
           </div>
         </div>
       </div>

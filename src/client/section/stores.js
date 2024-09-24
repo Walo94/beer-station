@@ -87,7 +87,7 @@ const Stores = () => {
   return (
     <div className="flex flex-col items-center justify-center p-4 min-h-screen bg-gray-100">
       <h2 className="text-2xl mb-4 text-gray-600">Ubicaciones de nuestras tiendas</h2>
-      <div className="w-full lg:w-11/12 xl:w-10/12 2xl:w-9/12 h-[500px] overflow-hidden rounded-lg shadow-lg relative">
+      <div className="w-full lg:w-11/12 xl:w-10/12 2xl:w-9/12 h-[600px] overflow-hidden rounded-lg shadow-lg relative">
         {isMapReady && userLocation ? (
           <MapContainer
             center={nearestStore ? [nearestStore.lat, nearestStore.lng] : userLocation}

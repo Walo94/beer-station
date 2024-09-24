@@ -44,7 +44,7 @@ const OfferProductsSlider = () => {
                                 />
                             </div>
                             <div className="flex-grow mt-4">
-                                <h3 className="text-sm font-semibold">{product.name}</h3>
+                                <h3 className="text-sm font-semibold h-10 overflow-hidden">{product.name}</h3>
                                 <p className="text-red-600 text-lg font-bold mt-2">{product.price}</p>
                             </div>
 
