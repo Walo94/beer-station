@@ -37,18 +37,18 @@ const Slider = () => {
       </div>
       <button
         onClick={prevSlide}
-         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-[#34d986] p-3 rounded-full shadow-md text-white text-lg"
+         className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-[#e60311] p-3 rounded-full shadow-md text-white text-lg"
       >
         &lt;
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-[#34d986] p-3 rounded-full shadow-md text-white text-lg"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-[#e60311] p-3 rounded-full shadow-md text-white text-lg"
       >
         &gt;
       </button>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        <button className="bg-[#34d986] text-white py-3 px-6 rounded text-lg">
+        <button className="bg-[#e60311] text-white py-3 px-6 rounded text-lg">
           Comprar Ahora
         </button>
       </div>

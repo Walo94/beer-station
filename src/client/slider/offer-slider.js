@@ -2,12 +2,13 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
-import product1 from '../../img/dark.png';
-import product2 from '../../img/metropolis.png';
-import product3 from '../../img/schneider.png';
-import product4 from '../../img/superlupe.png';
-import product5 from '../../img/ale.png';
+import product1 from '../../img/ale.png';
+import product2 from '../../img/product2.png';
+import product3 from '../../img/product3.png';
+import product4 from '../../img/product4.png';
+import product5 from '../../img/product5.png';
 import product6 from '../../img/product6.png';
+import product7 from '../../img/product7.png';
 import 'remixicon/fonts/remixicon.css';
 
 const products = [
@@ -16,13 +17,13 @@ const products = [
     { id: 3, image: product3, name: 'Ron Bacardi Blanco 980 ml', price: '$400 MXN' },
     { id: 4, image: product4, name: 'Tequila Gran Centenario Rep 950 ml', price: '$550 MXN' },
     { id: 5, image: product5, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' },
-    { id: 6, image: product6, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' }
+    { id: 6, image: product6, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' },
+    { id: 7, image: product7, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' }
 ];
 
-const FeaturedProductsSlider = () => {
+const OfferProductsSlider = () => {
     return (
         <div className="my-12 px-4">
-            <h2 className="text-3xl text-gray-600 font-bold text-center mb-4">PRODUCTOS DESTACADOS</h2>
             <Swiper
                 modules={[Navigation, Pagination, A11y]}
                 spaceBetween={10}
@@ -69,4 +70,4 @@ const FeaturedProductsSlider = () => {
     );
 };
 
-export default FeaturedProductsSlider;
+export default OfferProductsSlider;
