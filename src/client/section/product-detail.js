@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import ReactImageMagnify from 'react-image-magnify';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 import productImage from '../../img/superlupe.png';
 
 const ProductDetail = () => {
@@ -17,42 +18,20 @@ const ProductDetail = () => {
         <div className="container mx-auto mt-12 px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Imagen del producto con zoom */}
             <div className="flex flex-col items-center mt-16">
-                <ReactImageMagnify
-                    {...{
-                        smallImage: {
-                            alt: 'Tequila Antigua Cruz Rep',
-                            isFluidWidth: true,
-                            src: productImage,
-                            sizes: '(max-width: 768px) 100vw, 500px',
-                        },
-                        largeImage: {
-                            src: productImage,
-                            width: 780,
-                            height: 1050,
-                        },
-                        enlargedImageContainerDimensions: {
-                            width: '200%', // Proporción del tamaño del área ampliada
-                            height: '150%', // Altura de la imagen ampliada
-                        },
-                        lensStyle: { // Estilo del lente rectangular para mostrar el zoom
-                            backgroundColor: 'rgba(0, 0, 0, 0.3)', // Ligeramente transparente
-                        },
-                        enlargedImagePosition: 'beside', // El zoom aparece al lado de la imagen pequeña
-                        shouldUsePositiveSpaceLens: true,
-                    }}
-                    style={{
-                        width: '100%',
-                        maxWidth: '400px',
-                        height: 'auto',
-                    }}
-                />
+                <Zoom>
+                    <img 
+                        src={productImage} 
+                        alt="Tequila Antigua Cruz Rep" 
+                        className="w-full max-w-xs h-auto cursor-pointer"
+                    />
+                </Zoom>
             </div>
 
             {/* Detalles del producto */}
             <div>
                 <h2 className="text-3xl font-bold text-gray-700 mb-2">Tequila Antigua Cruz Rep 750 ml</h2>
                 <p className="text-gray-500 mb-4">SKU: 15922</p>
-                
+
                 {/* Precio */}
                 <div className="flex items-center space-x-4">
                     <span className="text-red-600 text-4xl font-bold">$476.25</span>
