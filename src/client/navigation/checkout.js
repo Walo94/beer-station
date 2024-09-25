@@ -37,7 +37,7 @@ export default function Checkout({ cartItems }) {
   }, [cartItems]);
 
   return (
-    <div className="checkout-container mt-6">
+    <div className="checkout-container mt-10">
       {/* Tabs del Proceso */}
       <div className="w-full border-b border-gray-300">
         <ul className="flex justify-around">
