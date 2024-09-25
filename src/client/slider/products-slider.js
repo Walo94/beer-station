@@ -3,23 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
-import product1 from '../../img/dark.png';
-import product2 from '../../img/metropolis.png';
-import product3 from '../../img/schneider.png';
-import product4 from '../../img/superlupe.png';
-import product5 from '../../img/ale.png';
-import product6 from '../../img/product6.png';
 import oferIcon from '../../img/oferta.png'
+import { products } from './product-list';
 import 'remixicon/fonts/remixicon.css';
-
-const products = [
-    { id: 1, image: product1, name: 'Dark Force Stout', price: '$330 MXN' },
-    { id: 2, image: product2, name: 'Tequila Cuervo Tradicional Reposado 950 ml', price: '$600 MXN' },
-    { id: 3, image: product3, name: 'Ron Bacardi Blanco 980 ml', price: '$400 MXN' },
-    { id: 4, image: product4, name: 'Tequila Gran Centenario Rep 950 ml', price: '$550 MXN' },
-    { id: 5, image: product5, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' },
-    { id: 6, image: product6, name: 'Tequila Gran Centenario Rep 950 ml', price: '$400 MXN' }
-];
 
 const FeaturedProductsSlider = ({ addToCart }) => {
     const navigate = useNavigate();
@@ -27,7 +13,6 @@ const FeaturedProductsSlider = ({ addToCart }) => {
     const handleViewMore = (productId) => {
         navigate(`/product/${productId}`);
     };
-
 
     return (
         <div className="my-12 px-4">
@@ -58,21 +43,23 @@ const FeaturedProductsSlider = ({ addToCart }) => {
                                 <h3 className="text-sm font-semibold h-10 overflow-hidden"> {/* Altura fija para la descripción */}
                                     {product.name}
                                 </h3>
-                                <p className="text-red-600 text-lg font-bold mt-2">{product.price}</p>
+                                <p className="text-red-600 text-lg mt-2">{product.price}</p>
                             </div>
 
                             {/* Botones al hacer hover */}
                             <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-2">
                                 {/* Botón Agregar al carrito */}
                                 <button className="bg-green-500 text-white py-2 px-4 rounded-lg flex items-center space-x-2"
-                                    onClick={() => addToCart(product)}>
+                                    onClick={() => addToCart(product)}
+                                >
                                     <i className="ri-shopping-cart-line"></i>
                                     <span>Agregar al carrito</span>
                                 </button>
 
                                 {/* Botón Ver más */}
                                 <button className="bg-[#e60311] text-white py-2 px-4 rounded-lg flex items-center space-x-2"
-                                    onClick={() => handleViewMore(product.id)}>
+                                    onClick={() => handleViewMore(product.id)}
+                                >
                                     <i className="ri-eye-line"></i>
                                     <span>Ver más</span>
                                 </button>

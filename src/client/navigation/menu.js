@@ -4,6 +4,11 @@ import 'remixicon/fonts/remixicon.css';
 import logo from '../../img/ahorramax.png';
 import google_logo from '../../img/google-play-fill.png';
 import LoginPopup from './LoginPopup'
+import FarmaciaLogo from '../../img/farmacia.png'
+import LicoresLogo from '../../img/licores.png'
+import AbarrotesLogo from '../../img/abarrotes.png'
+import TiendasLogo from '../../img/tiendas.png'
+import InicioLogo from '../../img/home.png'
 import Cart from './cart';
 
 
@@ -31,7 +36,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300" style={{ backgroundColor: '#ffff00' }}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300" style={{ backgroundColor: '#fff' }}>
       <div className={`bg-[#e60311] transition-all duration-300 ${isScrolled ? 'h-0 overflow-hidden' : 'h-10'}`}>
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
           <div className="flex space-x-4">
@@ -92,11 +97,11 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
               </button>
               <div className="flex flex-col space-y-2">
                 <Link to="/" className="flex items-center text-gray-600 hover:text-blue-900">
-                  <i className="ri-home-fill"></i> Inicio
+                  <img src={InicioLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Inicio</span>
                 </Link>
                 <div className="relative group">
                   <Link to="#" className="text-gray-600 hover:text-blue-900 flex items-center">
-                    <i className="ri-store-3-fill"></i> Abarrotes <i className="ri-arrow-down-s-line ml-1"></i>
+                    <img src={AbarrotesLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Abarrotes</span> <i className="ri-arrow-down-s-line ml-1"></i>
                   </Link>
                   {/* Submenu de accesorios */}
                   <div className="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
@@ -111,7 +116,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
                 </div>
                 <div className="relative group">
                   <Link to="#" className="text-gray-600 hover:text-blue-900 flex items-center">
-                    <i className="ri-empathize-fill"></i> Farmacia <i className="ri-arrow-down-s-line ml-1"></i>
+                    <img src={FarmaciaLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Farmacia</span> <i className="ri-arrow-down-s-line ml-1"></i>
                   </Link>
                   {/* Submenu de farmacia */}
                   <div className="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
@@ -124,7 +129,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
                 </div>
                 <div className="relative group">
                   <Link to="#" className="text-gray-600 hover:text-blue-900 flex items-center">
-                    <i className="ri-goblet-2-fill"></i> Licores <i className="ri-arrow-down-s-line ml-1"></i>
+                    <img src={LicoresLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Licores</span> <i className="ri-arrow-down-s-line ml-1"></i>
                   </Link>
                   {/* Submenu de licores */}
                   <div className="absolute left-0 mt-0 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
@@ -138,7 +143,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
                   </div>
                 </div>
                 <Link to="/stores" className="flex items-center text-gray-600 hover:text-blue-900">
-                  <i className="ri-map-pin-fill"></i> Sucursales
+                  <img src={TiendasLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Sucursales</span>
                 </Link>
               </div>
             </nav>
@@ -147,12 +152,12 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
           <nav className="hidden md:flex space-x-8">
             <div className="relative group">
               <Link to="/" className="flex items-center text-gray-600 hover:text-blue-900 pb-2">
-                <i className="ri-home-smile-fill"></i> Inicio
+                <img src={InicioLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Inicio</span>
               </Link>
             </div>
             <div className="relative group">
               <Link to="#" className="flex items-center text-gray-600 hover:text-blue-900">
-                <i className="ri-store-3-fill"></i> Abarrotes <i className="ri-arrow-down-s-line ml-1"></i>
+                <img src={AbarrotesLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Abarrotes</span> <i className="ri-arrow-down-s-line ml-1"></i>
               </Link>
               <div className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
                 <div className="py-2">
@@ -166,7 +171,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
             </div>
             <div className="relative group">
               <Link to="#" className="flex items-center text-gray-600 hover:text-blue-900">
-                <i className="ri-empathize-fill"></i> Farmacia <i className="ri-arrow-down-s-line ml-1"></i>
+                <img src={FarmaciaLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Farmacia</span> <i className="ri-arrow-down-s-line ml-1"></i>
               </Link>
               <div className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
                 <div className="py-2">
@@ -178,7 +183,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
             </div>
             <div className="relative group">
               <Link to="#" className="flex items-center text-gray-600 hover:text-blue-900">
-                <i className="ri-goblet-2-fill"></i> Licores <i className="ri-arrow-down-s-line ml-1"></i>
+                <img src={LicoresLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Licores</span> <i className="ri-arrow-down-s-line ml-1"></i>
               </Link>
               <div className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
                 <div className="py-2">
@@ -192,7 +197,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
             </div>
             <div className="relative group">
               <Link to="/stores" className="flex items-center text-gray-600 hover:text-blue-900">
-                <i className="ri-map-pin-fill"></i> Sucursales
+                <img src={TiendasLogo} alt="YouTube" className="h-6 w-6" /><span className='ml-2'>Sucursales</span>
               </Link>
             </div>
           </nav>
@@ -227,9 +232,9 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
               </Link>
               {/* Tooltip del carrito */}
               {isCartVisible && (
-                
-                  <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
-               
+
+                <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+
               )}
             </div>
 

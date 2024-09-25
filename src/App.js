@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState,useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Menu from './client/navigation/menu'
 import Slider from './client/slider/main-slider';
@@ -11,35 +11,59 @@ import Footer from './client/section/footer';
 import Stores from './client/section/stores';
 import ProductDetail from './client/section/product-detail'
 import Departaments from './client/section/departament'
+import Checkout from './client/navigation/checkout'
 
 function App() {
 
-  // Estado del carrito
-  const [cartItems, setCartItems] = useState([]);
+  // Estado del carrito, inicializado desde localStorage
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('cartItems');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // Guardar el carrito en localStorage cuando cartItems cambie
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   // Función para agregar productos al carrito
   const addToCart = (product) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+    setCartItems((prevItems) => {
+      const productExists = prevItems.find(item => item.id === product.id);
+      if (productExists) {
+        // Actualiza la cantidad si el producto ya está en el carrito
+        return prevItems.map(item =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        // Agrega un nuevo producto al carrito
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
   };
+  
 
-  // Función para eliminar productos del carrito (opcional)
+  // Función para eliminar productos del carrito
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter(item => item.id !== productId));
+    setCartItems((prevItems) => {
+      const updatedCart = prevItems.filter(item => item.id !== productId);
+      return updatedCart;
+    });
   };
 
   return (
     <Router>
-      <div className="flex flex-col">
-        <Menu  cartItems={cartItems} removeFromCart={removeFromCart}/>
+      <div className="flex flex-col min-h-screen">
+        <Menu cartItems={cartItems} removeFromCart={removeFromCart} />
         <div className="p-0 mt-32">
           <Routes>
             {/* Ruta principal */}
             <Route path="/" element={
               <>
                 <Slider />
-                <FeaturedProductsSlider addToCart={addToCart}/>
+                <FeaturedProductsSlider addToCart={addToCart} />
                 <Banner />
-                <Offer />
+                <Offer addToCart={addToCart} />
                 <Departaments />
                 <Newsletter />
                 <PayBanner />
@@ -48,6 +72,7 @@ function App() {
             {/* Ruta para las tiendas */}
             <Route path="/stores" element={<Stores />} />
             <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
           </Routes>
         </div>
 

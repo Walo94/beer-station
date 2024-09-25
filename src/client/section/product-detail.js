@@ -1,89 +1,156 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-import productImage from '../../img/superlupe.png';
+import loadingImage from '../../img/ahorramax.png';
+import facebookIcon from '../../img/facebook_icon.png';
+import whatsappIcon from '../../img/whatsapp_icon.png';
+import emailIcon from '../../img/email_icon.png';
+import { products } from '../slider/product-list';
+import { productListOffer } from '../slider/product-list-offer';
 
 const ProductDetail = () => {
+    const { id } = useParams();
+    const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
+    const [product, setProduct] = useState(null);
 
-    const handleQuantityChange = (action) => {
-        if (action === 'increment') {
-            setQuantity(prevQuantity => prevQuantity + 1);
-        } else if (action === 'decrement' && quantity > 1) {
-            setQuantity(prevQuantity => prevQuantity - 1);
-        }
+    useEffect(() => {
+        const imageLoader = setTimeout(() => {
+            setLoading(false);
+        }, 700);
+
+        // Combina las dos listas de productos
+        const combinedProducts = [...products, ...productListOffer];
+
+        // Busca el producto basado en el id en ambas listas combinadas
+        const foundProduct = combinedProducts.find(product => product.id === parseInt(id));
+        setProduct(foundProduct);
+
+        return () => clearTimeout(imageLoader);
+    }, []);
+
+    // Función para aumentar la cantidad
+    const increaseQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
     };
 
+    // Función para disminuir la cantidad, evitando valores menores que 1
+    const decreaseQuantity = () => {
+        setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
+
+    if (!product) return <div>Producto no encontrado</div>;
+
     return (
-        <div className="container mx-auto mt-12 px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Imagen del producto con zoom */}
-            <div className="flex flex-col items-center mt-16">
-                <Zoom>
-                    <img 
-                        src={productImage} 
-                        alt="Tequila Antigua Cruz Rep" 
-                        className="w-full max-w-xs h-auto cursor-pointer"
-                    />
-                </Zoom>
-            </div>
-
-            {/* Detalles del producto */}
-            <div>
-                <h2 className="text-3xl font-bold text-gray-700 mb-2">Tequila Antigua Cruz Rep 750 ml</h2>
-                <p className="text-gray-500 mb-4">SKU: 15922</p>
-
-                {/* Precio */}
-                <div className="flex items-center space-x-4">
-                    <span className="text-red-600 text-4xl font-bold">$476.25</span>
-                </div>
-
-                {/* Controles de cantidad */}
-                <div className="flex items-center mt-4 space-x-4">
-                    <div className="flex items-center border border-gray-300 rounded">
-                        <button 
-                            className="py-2 px-4 text-gray-700" 
-                            onClick={() => handleQuantityChange('decrement')}
-                        >-</button>
-                        <span className="py-2 px-4 border-l border-r border-gray-300">{quantity}</span>
-                        <button 
-                            className="py-2 px-4 text-gray-700" 
-                            onClick={() => handleQuantityChange('increment')}
-                        >+</button>
+        <div className="relative">
+            {/* Contenido principal que se oculta mientras está cargando */}
+            <div className={`${loading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}>
+                <div className="container mx-auto mt-12 px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Imagen del producto con zoom */}
+                    <div className="flex flex-col items-center mt-16">
+                        <Zoom>
+                            <img
+                                src={product.image}
+                                alt={product.name}
+                                className="w-full max-w-xs h-auto cursor-pointer"
+                            />
+                        </Zoom>
                     </div>
 
-                    {/* Botón Agregar al carrito */}
-                    <button className="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600">
-                        A MI CARRITO
-                    </button>
-                </div>
+                    {/* Detalles del producto */}
+                    <div>
+                        <h2 className="text-3xl font-bold text-gray-700 mb-2">{product.name}</h2>
+                        <p className="text-gray-500 mb-4">SKU: {product.id}</p>
 
-                {/* Botón Comprar Ahora */}
-                <button className="mt-4 w-full bg-[#e60311] text-white py-3 rounded-lg text-lg hover:bg-[#e60311]">
-                    COMPRAR AHORA
-                </button>
+                        {/* Precio, control de cantidad y botón añadir al carrito */}
+                        <div className="flex items-center space-x-4 mb-4">
+                            <span className="text-red-600 text-3xl">{product.price}</span>
 
-                {/* Descripción del producto */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md w-full max-w-4xl text-gray-700">
-                    <h2 className="text-xl font-semibold mb-4">Descripción</h2>
-                    <p className="mb-4">
-                        Pasta Dental Colgate Mfp 100Ml - Colgate - ¡APROVECHA!, a partir de 3 piezas de este producto
-                        podrás conseguir un precio especial (el descuento lo verás aplicado en el carrito de compras).
-                    </p>
-                    <p className="mb-4">
-                        En AhorraMax podrás encontrar todos los artículos en presentaciones institucionales para tu 
-                        hotel, restaurante, industria o negocio de la marca Colgate al mejor precio.
-                    </p>
-                    <p className="mb-4 font-semibold text-red-500">
-                        ¡Aprovecha nuestros envíos gratis en pedidos de más de $1000! (sólo zona centro y alrededores de San Francisco del rincón).
-                    </p>
-                    <p className="mb-4">
-                        ¿No has encontrado lo que buscas?: Escríbenos a 
-                        <a href="mailto:servicioaclientes@surtitienda.mx" className="text-blue-500 underline ml-1">
-                            servicioaclientes@ahorramax.mx
-                        </a>
-                    </p>
+                            {/* Control de cantidad */}
+                            <div className="flex items-center">
+                                <button
+                                    onClick={decreaseQuantity}
+                                    className="px-3 py-1 bg-gray-200 text-gray-600 rounded-l hover:bg-gray-300"
+                                >
+                                    -
+                                </button>
+                                <span className="px-4 py-1 bg-white border-t border-b border-gray-300 text-gray-700">
+                                    {quantity}
+                                </span>
+                                <button
+                                    onClick={increaseQuantity}
+                                    className="px-3 py-1 bg-gray-200 text-gray-600 rounded-r hover:bg-gray-300"
+                                >
+                                    +
+                                </button>
+                            </div>
+
+                            {/* Botón Añadir al carrito */}
+                            <button
+                                className="ml-4 px-4 py-1 border border-[#e60311] text-[#e60311] rounded-lg text-base transition-colors duration-300 hover:bg-[#e60311] hover:text-white relative overflow-hidden"
+                            >
+                                <span className="relative z-10">AÑADIR AL CARRITO</span>
+                                <span className="absolute inset-0 w-0 bg-[#e60311] transition-all duration-300 ease-in-out hover:w-full z-0"></span>
+                            </button>
+
+                            {/* Íconos para compartir en redes sociales */}
+                            <div className="flex space-x-3 ml-4">
+                                {/* Facebook */}
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                                    <img src={facebookIcon} alt="Facebook" className="w-6 h-6 hover:opacity-75" />
+                                </a>
+                                {/* WhatsApp */}
+                                <a href="https://wa.me/?text=Check%20this%20out!" target="_blank" rel="noopener noreferrer">
+                                    <img src={whatsappIcon} alt="WhatsApp" className="w-6 h-6 hover:opacity-75" />
+                                </a>
+                                {/* Email */}
+                                <a href="mailto:?subject=Te%20interesa%20este%20producto&body=Te%20recomiendo%20este%20producto:%20Tequila%20Antigua%20Cruz%20Rep%20750%20ml" target="_blank" rel="noopener noreferrer">
+                                    <img src={emailIcon} alt="Email" className="w-6 h-6 hover:opacity-75" />
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Botón Comprar Ahora */}
+                        <button className="mt-4 w-full bg-[#e60311] text-white py-2 rounded-lg text-lg hover:bg-[#e60311]">
+                            COMPRAR AHORA
+                        </button>
+
+                        {/* Descripción del producto */}
+                        <div className="bg-gray-100 p-6 rounded-lg w-full max-w-4xl text-gray-700 mt-2">
+                            <h2 className="text-xl font-semibold mb-4">Descripción</h2>
+                            <p className="mb-4">
+                                {product.description}
+                            </p>
+                            <p className="mb-4">
+                                En AhorraMax podrás encontrar este y otros productos de alta calidad a precios
+                                competitivos. ¡Aprovecha nuestras ofertas exclusivas en línea y disfruta de
+                                envíos rápidos a todo el país!
+                            </p>
+                            <p className="mb-4 font-semibold text-red-500">
+                                ¡Envía tu pedido hoy y recibe en las próximas 12 horas!
+                            </p>
+                            <p className="mb-4">
+                                Si tienes alguna duda o necesitas asistencia, no dudes en contactarnos a
+                                <a href="mailto:servicioaclientes@ahorramax.mx" className="text-blue-500 underline ml-1">
+                                    servicioaclientes@ahorramax.mx
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {/* Capa de carga que se muestra hasta que termine de cargar */}
+            {loading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <img
+                        src={loadingImage}
+                        alt="Loading"
+                        className="w-48 h-32 animate-shake"
+                    />
+                </div>
+            )}
         </div>
     );
 };
