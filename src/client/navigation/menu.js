@@ -75,7 +75,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
               <img
                 src={logo}
                 alt="Beer Station Logo"
-                className={`transition-all duration-300 ${isScrolled ? 'h-20 w-26' : 'h-20 w-26'}`}
+                className={'h-24 w-36'}
               />
             </Link>
 
