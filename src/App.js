@@ -12,6 +12,7 @@ import Stores from './client/section/stores';
 import ProductDetail from './client/section/product-detail'
 import Departaments from './client/section/departament'
 import Checkout from './client/navigation/checkout'
+import ProductGrid from './client/section/product-grid'
 
 function App() {
 
@@ -71,8 +72,9 @@ function App() {
             } />
             {/* Ruta para las tiendas */}
             <Route path="/stores" element={<Stores />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/product/:id" element={<ProductDetail addToCart={addToCart}/>} />
             <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
+            <Route path='/productos-medicamentos' element={<ProductGrid addToCart={addToCart}/>}/>
           </Routes>
         </div>
 

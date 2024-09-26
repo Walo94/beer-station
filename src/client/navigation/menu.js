@@ -175,7 +175,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
               </Link>
               <div className="absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg z-50 hidden group-hover:block">
                 <div className="py-2">
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#ffff00]">Medicamentos</Link>
+                  <Link to="/productos-medicamentos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#ffff00]">Medicamentos</Link>
                   <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#ffff00]">Higiene Personal</Link>
                   <Link to="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#ffff00]">Salud Sexual</Link>
                 </div>

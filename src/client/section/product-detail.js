@@ -6,10 +6,12 @@ import loadingImage from '../../img/ahorramax.png';
 import facebookIcon from '../../img/facebook_icon.png';
 import whatsappIcon from '../../img/whatsapp_icon.png';
 import emailIcon from '../../img/email_icon.png';
+import notFoundImage from '../../img/not-found.png'
 import { products } from '../slider/product-list';
 import { productListOffer } from '../slider/product-list-offer';
+import { productsListGrid } from './product-list-grid'
 
-const ProductDetail = () => {
+const ProductDetail = ({ addToCart }) => {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
@@ -21,7 +23,7 @@ const ProductDetail = () => {
         }, 700);
 
         // Combina las dos listas de productos
-        const combinedProducts = [...products, ...productListOffer];
+        const combinedProducts = [...products, ...productListOffer, ...productsListGrid];
 
         // Busca el producto basado en el id en ambas listas combinadas
         const foundProduct = combinedProducts.find(product => product.id === parseInt(id));
@@ -40,7 +42,10 @@ const ProductDetail = () => {
         setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
     };
 
-    if (!product) return <div>Producto no encontrado</div>;
+    if (!product) return <div className='mt-16 text-center'>
+        <p className='text-2xl font-bold text-[#e60311]'>Producto no encontrado!</p>
+        <img src={notFoundImage} alt="Producto no encontrado" className='mt-4 w-64 h-64 mx-auto' />
+    </div>;
 
     return (
         <div className="relative">
@@ -59,7 +64,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Detalles del producto */}
-                    <div>
+                    <div className='mt-4'>
                         <h2 className="text-3xl font-bold text-gray-700 mb-2">{product.name}</h2>
                         <p className="text-gray-500 mb-4">SKU: {product.id}</p>
 
@@ -89,6 +94,7 @@ const ProductDetail = () => {
                             {/* Botón Añadir al carrito */}
                             <button
                                 className="ml-4 px-4 py-1 border border-[#e60311] text-[#e60311] rounded-lg text-base transition-colors duration-300 hover:bg-[#e60311] hover:text-white relative overflow-hidden"
+                                onClick={() => addToCart(product)}
                             >
                                 <span className="relative z-10">AÑADIR AL CARRITO</span>
                                 <span className="absolute inset-0 w-0 bg-[#e60311] transition-all duration-300 ease-in-out hover:w-full z-0"></span>
