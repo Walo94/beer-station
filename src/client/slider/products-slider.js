@@ -49,7 +49,7 @@ const FeaturedProductsSlider = ({ addToCart }) => {
                             {/* Botones al hacer hover */}
                             <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 space-y-2">
                                 {/* Botón Agregar al carrito */}
-                                <button className="bg-green-500 text-white py-2 px-4 rounded-lg flex items-center space-x-2"
+                                <button className="bg-green-500 text-white py-2 px-4 rounded-lg flex items-center space-x-2 hover:bg-green-600"
                                     onClick={() => addToCart(product)}
                                 >
                                     <i className="ri-shopping-cart-line"></i>
@@ -57,7 +57,7 @@ const FeaturedProductsSlider = ({ addToCart }) => {
                                 </button>
 
                                 {/* Botón Ver más */}
-                                <button className="bg-[#e60311] text-white py-2 px-4 rounded-lg flex items-center space-x-2"
+                                <button className="bg-[#e60311] text-white py-2 px-4 rounded-lg flex items-center space-x-2 hover:bg-red-600"
                                     onClick={() => handleViewMore(product.id)}
                                 >
                                     <i className="ri-eye-line"></i>

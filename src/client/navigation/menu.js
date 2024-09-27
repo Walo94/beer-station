@@ -18,6 +18,7 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const totalItemsInCart = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -221,13 +222,13 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
             {showPopup && <LoginPopup onClose={handleClosePopup} />}
             <div className="relative" onMouseLeave={() => setIsCartVisible(false)}>
               <Link
-                to="#"
+                to="/checkout"
                 className="text-gray-600 hover:text-gray-900"
                 onMouseEnter={() => setIsCartVisible(true)}
               >
                 <i className="ri-shopping-cart-line text-2xl"></i>
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems.length}
+                  {totalItemsInCart}
                 </span>
               </Link>
               {/* Tooltip del carrito */}
@@ -237,7 +238,6 @@ export default function BeerStationHeader({ cartItems, removeFromCart }) {
 
               )}
             </div>
-
           </div>
         </div>
       </div>

@@ -43,12 +43,20 @@ function App() {
     });
   };
   
-
   // Función para eliminar productos del carrito
   const removeFromCart = (productId) => {
     setCartItems((prevItems) => {
       const updatedCart = prevItems.filter(item => item.id !== productId);
       return updatedCart;
+    });
+  };
+
+  // Función para agregar o quitar items en checkout
+  const updateCartItemQuantity = (productId, newQuantity) => {
+    setCartItems((prevItems) => {
+      return prevItems.map(item => 
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      );
     });
   };
 
@@ -73,7 +81,7 @@ function App() {
             {/* Ruta para las tiendas */}
             <Route path="/stores" element={<Stores />} />
             <Route path="/product/:id" element={<ProductDetail addToCart={addToCart}/>} />
-            <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
+            <Route path="/checkout" element={<Checkout cartItems={cartItems} updateCartItemQuantity={updateCartItemQuantity} removeFromCart={removeFromCart}/>} />
             <Route path='/productos-medicamentos' element={<ProductGrid addToCart={addToCart}/>}/>
           </Routes>
         </div>

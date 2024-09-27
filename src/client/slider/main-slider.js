@@ -48,7 +48,7 @@ const Slider = () => {
         &gt;
       </button>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-        <button className="bg-[#e60311] text-white py-3 px-6 rounded text-lg">
+        <button className="bg-[#e60311] text-white py-3 px-6 rounded text-lg hover:bg-red-600">
           Comprar Ahora
         </button>
       </div>

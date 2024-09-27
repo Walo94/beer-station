@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { productsListGrid } from './product-list-grid';
 
 // Componente del producto individual
-const Product = ({ product, addToCart }) => {
+const Product = ({ product, addToCart}) => {
   const navigate = useNavigate();
 
   // Función para manejar la navegación al detalle del producto
